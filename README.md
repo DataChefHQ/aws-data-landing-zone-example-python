@@ -16,9 +16,9 @@ details and available options, visit [datalandingzone.com](https://datalandingzo
 
 ## Configuration
 
-- To review the basic required parameters, refer to the [minimum_config.py](./data_landing_zone_example_python/minimum_config.py) file.
+- To review the basic required parameters, refer to the [app_minimum.py](./app_minimum.py) file.
 - For a more complete example, showing all the possible options,
-refer to [complete_config.py](./data_landing_zone_example_python/complete_config.py) file.
+refer to [app_complete.py](./app_complete.py) file.
 
 For a detailed documentation and available APIs, you can check the docs main website.
 

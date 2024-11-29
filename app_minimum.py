@@ -1,12 +1,17 @@
-from recipes_dlz import (
-    DataLandingZoneProps,
+#!/usr/bin/env python3
+import aws_cdk as cdk
+from aws_data_landing_zone import (
     Defaults,
     DlzAccountType,
-    DlzControlTowerStandardControls,
     Region,
+    DataLandingZone,
 )
 
-config = DataLandingZoneProps(
+
+app = cdk.App()
+
+DataLandingZone(
+    app,
     local_profile="",  # TODO: Not required; Will be optional from next release
     regions={
         "global": Region.EU_WEST_1,
@@ -27,12 +32,6 @@ config = DataLandingZoneProps(
                     "account_id": "YourRootAccountID",
                 },
             },
-            # Optional, showing that controls can be changed, added, or removed from the default
-            # These controls are applied to all the OUs in the org
-            "controls": [
-                *Defaults.root_controls(),
-                DlzControlTowerStandardControls.SH_SECRETS_MANAGER_3,
-            ],
         },
         "ous": {
             "security": {
@@ -48,7 +47,6 @@ config = DataLandingZoneProps(
             },
             "workloads": {
                 "ou_id": "WorkloadOrganizationUnitId",
-                # Small Org, all workloads/projects in the same accounts
                 "accounts": [
                     {
                         "name": "development",
@@ -62,14 +60,7 @@ config = DataLandingZoneProps(
             },
         },
     },
-    deployment_platform={
-        "gitHub": {
-            "references": [
-                {
-                    "owner": "DataChefHQ",
-                    "repo": "data-landing-zone-example-typescript",
-                },
-            ],
-        },
-    },
 )
+
+
+app.synth()

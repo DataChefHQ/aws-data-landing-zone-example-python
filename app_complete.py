@@ -1,7 +1,11 @@
-from aws_cdk import aws_ec2 as ec2, aws_iam as iam
-from recipes_dlz import (
+#!/usr/bin/env python3
+import aws_cdk as cdk
+from aws_cdk import (
+    aws_iam as iam,
+    aws_ec2 as ec2,
+)
+from aws_data_landing_zone import (
     DatabaseAction,
-    DataLandingZoneProps,
     Defaults,
     DlzAccountType,
     DlzControlTowerStandardControls,
@@ -12,15 +16,20 @@ from recipes_dlz import (
     SlackChannel,
     TableAction,
     TagAction,
+    DataLandingZone,
 )
+
+
+app = cdk.App()
 
 slack_budget_notifications = SlackChannel(
     slack_channel_configuration_name="budget-alerts",
-    slack_workspace_id="YourWorkspaceId:",
+    slack_workspace_id="YourWorkspaceId",
     slack_channel_id="YourChannelId",
 )
 
-config = DataLandingZoneProps(
+DataLandingZone(
+    app,
     local_profile="ct-sandbox-exported",
     regions={
         "global": Region.EU_WEST_1,
@@ -57,10 +66,10 @@ config = DataLandingZoneProps(
             },
         },
         {
-            "name": "backend-accounting-internal-development",
+            "name": "backend-accounting-development",
             "for_tags": {
                 "owner": "backend",
-                "project": "accounting-internal",
+                "project": "accounting",
                 "environment": "development",
             },
             "amount": 100,
@@ -153,7 +162,7 @@ config = DataLandingZoneProps(
                                 "admins": [
                                     "arn:aws:iam::YourProductionAccountID:role/aws-reserved/sso.amazonaws.com/eu-west-1/AWSReservedSSO_AdministratorAccess_edcdcd01206c378d"
                                 ],
-                                "hybrid_mode": True,
+                                "hybrid_mode": False,
                                 "tags": [
                                     {
                                         "tag_key": "common",
@@ -378,3 +387,6 @@ config = DataLandingZoneProps(
     print_report=False,
     print_deployment_order=True,
 )
+
+
+app.synth()
