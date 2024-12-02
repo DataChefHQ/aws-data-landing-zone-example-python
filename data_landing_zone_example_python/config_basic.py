@@ -1,16 +1,11 @@
-#!/usr/bin/env python3
-import aws_cdk as cdk
 from aws_data_landing_zone import (
     Defaults,
     DlzAccountType,
     Region,
-    DataLandingZone,
+    DataLandingZoneProps,
 )
 
-app = cdk.App()
-
-DataLandingZone(
-    app,
+config = DataLandingZoneProps(
     local_profile="",  # TODO: Not required; Will be optional from next release
     regions={
         "global": Region.EU_WEST_1,
@@ -60,6 +55,3 @@ DataLandingZone(
         },
     },
 )
-
-
-app.synth()
