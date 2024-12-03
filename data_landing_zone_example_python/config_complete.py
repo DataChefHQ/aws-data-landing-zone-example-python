@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-import aws_cdk as cdk
 from aws_cdk import (
     aws_iam as iam,
     aws_ec2 as ec2,
@@ -13,14 +11,11 @@ from aws_data_landing_zone import (
     Region,
     SecurityHubNotificationSeverity,
     SecurityHubNotificationSWorkflowStatus,
-    SlackChannel,
     TableAction,
     TagAction,
-    DataLandingZone,
+    DataLandingZoneProps,
+    SlackChannel,
 )
-
-
-app = cdk.App()
 
 slack_budget_notifications = SlackChannel(
     slack_channel_configuration_name="budget-alerts",
@@ -28,8 +23,7 @@ slack_budget_notifications = SlackChannel(
     slack_channel_id="YourChannelId",
 )
 
-DataLandingZone(
-    app,
+config = DataLandingZoneProps(
     local_profile="ct-sandbox-exported",
     regions={
         "global": Region.EU_WEST_1,
@@ -387,6 +381,3 @@ DataLandingZone(
     print_report=False,
     print_deployment_order=True,
 )
-
-
-app.synth()
