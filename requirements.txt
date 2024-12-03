@@ -4,7 +4,7 @@ aws-cdk.asset-awscli-v1==2.2.213
 aws-cdk.asset-kubectl-v20==2.1.3
 aws-cdk.asset-node-proxy-agent-v6==2.1.0
 aws-cdk.cloud-assembly-schema==38.0.1
-aws-data-landing-zone==0.0.39
+aws-data-landing-zone==0.0.40
 cattrs==24.1.2
 cdk-express-pipeline==1.0.2
 constructs==10.4.2
@@ -12,6 +12,7 @@ importlib_resources==6.4.5
 jsii==1.105.0
 publication==0.0.3
 python-dateutil==2.9.0.post0
+-e git+ssh://git@github.com/DataChefHQ/recipes_data-landing-zone_data-landing-zone-sandbox-python.git@47aa9e80ae867bd639c502a4dcdbe57852ad6da7#egg=recipes_dlz&subdirectory=recipes_dlz-0.0.0
 six==1.16.0
 typeguard==2.13.3
 typing_extensions==4.12.2

@@ -1,4 +1,5 @@
 from aws_data_landing_zone import Scripts
-from data_landing_zone_example_python import config_minimum
+from data_landing_zone_example_python.config_minimum import config
 
-Scripts.deploy_select(props=config_minimum.config, id="*_production--*_*")
+scripts = Scripts()
+scripts.deploy_select(props=config, id="*_production--*_*")
